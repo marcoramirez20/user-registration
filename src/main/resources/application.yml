@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:usersdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  h2:
+    console:
+      enabled: true
+
+app:
+  security:
+    jwt:
+      secret: "change-this-in-prod-please-32-bytes-minimum-secret-key"
+      expirationMinutes: 120
+  validation:
+    emailRegex: '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+    passwordRegex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$'
