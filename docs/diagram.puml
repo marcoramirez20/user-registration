@@ -1,0 +1,18 @@
+@startuml
+title User Registration API - Component Diagram
+
+actor Client
+
+rectangle "User Registration Application" {
+  [UserController] --> [UserService]
+  [UserService] --> [UserRepository]
+  [UserService] --> [JWTService]
+  [UserRepository] --> [H2 Database]
+}
+
+Client --> [UserController] : POST /api/v1/users (JSON)
+
+note right of [UserController]
+{ "name","email","password","phones[]" }
+end note
+@enduml

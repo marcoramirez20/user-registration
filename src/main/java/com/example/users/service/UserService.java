@@ -7,7 +7,7 @@ import com.example.users.dto.UserResponse;
 import com.example.users.entity.PhoneEntity;
 import com.example.users.entity.UserEntity;
 import com.example.users.repository.UserRepository;
-import com.example.users.util.JWTGenerator;
+import com.example.users.util.JWTService;
 import com.example.users.util.ValidationProperties;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -20,14 +20,14 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final ValidationProperties validationProperties;
-    private final JWTGenerator jwtGenerator;
+    private final JWTService jwtService;
 
     public UserService(UserRepository userRepository,
                        ValidationProperties validationProperties,
-                       JWTGenerator jwtGenerator) {
+                       JWTService jwtService) {
         this.userRepository = userRepository;
         this.validationProperties = validationProperties;
-        this.jwtGenerator = jwtGenerator;
+        this.jwtService = jwtService;
     }
 
     @Transactional
@@ -59,7 +59,7 @@ public class UserService {
             }
         }
 
-        String token = jwtGenerator.generateToken(entity.getEmail());
+        String token = jwtService.generateToken(entity.getEmail());
         entity.setToken(token);
 
         entity = userRepository.save(entity);
