@@ -12,12 +12,12 @@ import java.time.Instant;
 import java.util.Date;
 
 @Component
-public class JwtGenerator {
+public class JWTGenerator {
 
     private final SecretKey key;
     private final long expirationMillis;
 
-    public JwtGenerator(@Value("${app.security.jwt.secret}") String secret,
+    public JWTGenerator(@Value("${app.security.jwt.secret}") String secret,
                         @Value("${app.security.jwt.expirationMinutes}") long expirationMinutes) {
         this.key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(java.util.Base64.getEncoder().encodeToString(secret.getBytes())));
         this.expirationMillis = expirationMinutes * 60 * 1000;
